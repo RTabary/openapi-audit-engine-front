@@ -1,0 +1,61 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <img src="../../assets/images/openapi.png" alt="" width="100px;">
+      <span style="margin-left: 10px;">OAS audit engine</span>
+      <span class="example-spacer"></span>
+      <a href="#" matTooltip="View project on Github" [matTooltipPosition]="'before'">
+          <img src="../../assets/images/github.png" alt="" width="20px;">
+      </a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+<div class="container-fluid" style="height:82vh;">
+    <div class="row">
+        <div class="col-sm-6 button-wrapper">
+          <button mat-raised-button (click)="openFileInput()"><mat-icon aria-hidden="false">cloud_upload</mat-icon>  Load API definition</button>
+          <input #fileInput (change)="fileUpload($event)" type="file" style="display:none">
+        </div>
+        <div class="col-sm-6 button-wrapper">
+            <mat-chip-list style="display: inline-block; margin-right: 5px;">
+                <mat-chip color="primary" selected>{{auditResults.length}} Problems</mat-chip>
+            </mat-chip-list>
+            <mat-checkbox style="margin: 0px 5px 0px 5px;" *ngFor="let s of severities" (change)="onDisplayChange($event, s.severity)" [checked]="true">{{severityNumber(s.severity)}} {{s.name}}</mat-checkbox>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6" style="padding: 0px;">
+            <ace-editor #editor
+              [(text)]="file" 
+              [mode]="mode"
+              [theme]="'monokai'"
+              [readOnly]="false"
+              [autoUpdateContent]="true" 
+              [durationBeforeCallback]="200"
+              (textChanged)="onAceChange($event)"
+              style="min-height: 82vh; width:100%; overflow: auto;">
+            </ace-editor>
+          </div>
+        <div class="col-sm-6" style="max-height: 82vh;overflow-x: hidden; overflow-x: auto;padding:5px;">
+            <div *ngIf="displayedResults.length === 0" style="margin-bottom: 5px;">
+              <mat-card>No audit to display (load an API definition file or paste your API definition in text editor)</mat-card>
+            </div>
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let r of displayedResults" (click)="moveToLine(r.range.start.line + 1, r.range.start.character)">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{r.code}}
+                    </mat-panel-title>
+                    <mat-panel-description style="flex-grow:0">
+                      <mat-icon *ngIf="r.severity == 2" aria-hidden="false" style="color:rgba(98,219,42,0.4);">bookmark</mat-icon>
+                      <mat-icon *ngIf="r.severity == 2" aria-hidden="false" style="color:rgba(0,0,0,.4);">info</mat-icon>
+                      <mat-icon *ngIf="r.severity == 1" aria-hidden="false" style="color:orange;">warning</mat-icon>
+                      <mat-icon *ngIf="r.severity == 0" aria-hidden="false" style="color:red;">error</mat-icon>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p>{{r.message}}</p>
+                  <p>From {{r.range.start.line + 1}}:{{r.range.start.character}} to {{r.range.end.line + 1}}:{{r.range.end.character}}</p>
+                </mat-expansion-panel>
+              </mat-accordion>
+        </div>
+    </div>
+</div>
