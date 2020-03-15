@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "api-definition-auditor-front": {
+    "openapi-audit-engine-front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/api-definition-auditor-front",
+            "outputPath": "dist/openapi-audit-engine-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "api-definition-auditor-front:build"
+            "browserTarget": "openapi-audit-engine-front:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "api-definition-auditor-front:build:production"
+              "browserTarget": "openapi-audit-engine-front:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "api-definition-auditor-front:build"
+            "browserTarget": "openapi-audit-engine-front:build"
           }
         },
         "test": {
@@ -116,16 +116,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "api-definition-auditor-front:serve"
+            "devServerTarget": "openapi-audit-engine-front:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "api-definition-auditor-front:serve:production"
+              "devServerTarget": "openapi-audit-engine-front:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "api-definition-auditor-front"
+  "defaultProject": "openapi-audit-engine-front"
 }
