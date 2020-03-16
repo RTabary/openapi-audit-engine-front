@@ -1,6 +1,16 @@
-# ApiDefinitionAuditorFront
+# OpenAPI audit engine front
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.4.
+
+Make your API definition (Open API Standard) clean.
+
+## Docker
+
+```bash
+docker-compose -f "docker-compose.yml" up -d --build
+````
+
+Launches both UI and backend API.
 
 ## Development server
 
