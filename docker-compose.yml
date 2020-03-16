@@ -1,0 +1,12 @@
+version: '2.0'
+services:
+  front:
+    image: roms/openapi-audit-engine-front:latest
+    ports:
+    - "4200:4200"
+  back:
+    image: roms/openapi-audit-engine-back:latest
+    volumes: 
+    - "/path/to/local/spectral/conf:/usr/src/app/dist/assets:ro"
+    ports: 
+    - "3000:3000"
